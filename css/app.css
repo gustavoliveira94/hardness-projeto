@@ -1,0 +1,128 @@
+body {
+    background-color: #3d006e;
+}
+
+.menu {
+    background-color: #3d005e;
+}
+
+.nav-top a {
+    color: #fff;
+}
+
+#logo {
+    font-size: 24px;
+    font-family: 'Germania One', cursive;
+}
+
+#logo-rodape {
+    color: #000;
+    font-size: 38px;
+    font-family: 'Germania One', cursive;
+}
+
+.nav-link:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #fff;
+    color: #000;
+}
+
+.dropdown-menu a {
+    color: #000;
+}
+
+.dropdown-menu a:active {
+    background-color: #3d006e;
+    color: #fff;
+}
+
+.newsletter {
+    display: flex;
+    margin: 20px 0;
+}
+
+.facebook-content {
+    background-color: #d6d8d9;
+}
+
+.facebook-embeded {
+    padding: 50px 0;
+}
+
+.login {
+    padding: 150px 15px;
+}
+
+.login h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.login form {
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.btn-purple {
+    background-color: #3d006e;
+    color: #fff;
+    border: 0;
+}
+
+.btn-purple:hover {
+    background-color: #3d005e;
+    color: #fff;
+}
+
+.card {
+    margin: 10px 15px;
+    padding: 0;
+}
+
+.filters {
+    background-color: #3d005e;
+}
+
+.filters a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    margin: 15px 0;
+}
+
+.filters a:hover {
+    text-decoration: none;
+}
+
+.filters a p {
+    margin: 0;
+}
+
+.rodape {
+    background-color: #d6d8d9;
+}
+
+.rodape p {
+    color: #000;
+    font-size: 22px;
+}
+
+.nav-rodape {
+    color: #000;
+}
+
+.nav-rodape:hover {
+    color: #000;
+}
+
+@media (max-width: 500px) {
+    .flex-column {
+        flex-direction: row !important;
+    }
+}
