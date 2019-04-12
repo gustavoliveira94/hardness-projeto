@@ -26,89 +26,37 @@
 <body>
     <?php
     require_once('./utils/nav.php');
+    require_once('./utils/caroussel.php');
     ?>
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="background-color: black;">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active" style="margin-top: 100px; margin-bottom: 100px">
-                <div class="row justify-content-center">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Apex</h5>
-                            <p>R$: 350,00</p>
-                            <a href="#" class="btn btn-purple">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="margin-top: 100px; margin-bottom: 100px">
-                <div class="row justify-content-center">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Apex</h5>
-                            <p>R$: 350,00</p>
-                            <a href="#" class="btn btn-purple">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="margin-top: 100px; margin-bottom: 100px">
-                <div class="row justify-content-center">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Apex</h5>
-                            <p>R$: 350,00</p>
-                            <a href="#" class="btn btn-purple">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
     <div class="filters">
         <div class="container">
             <div class="row justify-content-around align-items-center">
                 <div class="col-md-2">
-                    <a href="#">
+                    <a href="?produtocategoria=midiadigital">
                         <i class="fas fa-download fa-2x"></i>
                         <p>Mídia Digital</p>
                     </a>
                 </div>
                 <div class="col-md-2">
-                    <a href="#">
+                    <a href="?produtocategoria=midiafisica">
                         <i class="fas fa-compact-disc fa-2x"></i>
                         <p>Mídia Física</p>
                     </a>
                 </div>
                 <div class="col-md-2">
-                    <a href="#">
+                    <a href="?produtocategoria=consoles">
                         <i class="fas fa-gamepad fa-2x"></i>
                         <p>Consoles</p>
                     </a>
                 </div>
                 <div class="col-md-2">
-                    <a href="#">
+                    <a href="?produtocategoria=computadores">
                         <i class="fas fa-laptop fa-2x"></i>
                         <p>Computadores</p>
                     </a>
                 </div>
                 <div class="col-md-2">
-                    <a href="#">
+                    <a href="?produtocategoria=ovr">
                         <i class="fas fa-glasses fa-2x"></i>
                         <p>Óculos VR</p>
                     </a>
@@ -123,30 +71,62 @@
             </div>
         </div>
         <div class="row justify-content-between">
+            <?php
+            if (!isset($_GET['produtocategoria'])) {
+                $p = $produto->getProdutos();
+                foreach ($p as $produtos) {
+                    ?>
             <div class="card col-md-3">
-                <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
+                <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $produtos[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Apex</h5>
-                    <p>R$: 350,00</p>
+                    <h5 class="card-title">
+                        <?php echo $produtos[2] ?>
+                    </h5>
+                    <p>R$:
+                        <?php echo $produtos[6] ?>
+                    </p>
                     <a href="#" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
+            <?php
+
+        }
+    } else if (isset($_GET['produtocategoria'])) {
+        $categoria = addslashes($_GET['produtocategoria']);
+        $p = $produto->getProdutosCategoria($categoria);
+        if ($p > 0) {
+            foreach ($p as $produtos) {
+                ?>
             <div class="card col-md-3">
-                <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
+                <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $produtos[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Apex</h5>
-                    <p>R$: 350,00</p>
+                    <h5 class="card-title">
+                        <?php echo $produtos[2] ?>
+                    </h5>
+                    <p>R$:
+                        <?php echo $produtos[6] ?>
+                    </p>
                     <a href="#" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
-            <div class="card col-md-3">
-                <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Apex</h5>
-                    <p>R$: 350,00</p>
-                    <a href="#" class="btn btn-purple">Comprar</a>
-                </div>
+            <?php
+
+        }
+    } else { ?>
+            <div class="alert alert-danger" role="alert">
+                <?php
+                echo 'Nenhum produto cadastrado!';
+                ?>
             </div>
+            <?php
+
+        }
+
+    } ?>
         </div>
     </div>
     <?php

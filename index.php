@@ -20,66 +20,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
-    <title>Document</title>
+    <title>Hardness</title>
 </head>
 
 <body>
     <?php
     require_once('./utils/nav.php');
+    require_once('./utils/caroussel.php');
     ?>
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="background-color: black;">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active" style="margin-top: 100px; margin-bottom: 100px">
-                <div class="row justify-content-center">
-                <div class="card" style="width: 18rem;">
-                        <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Apex</h5>
-                            <p>R$: 350,00</p>
-                            <a href="#" class="btn btn-purple">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="margin-top: 100px; margin-bottom: 100px">
-                <div class="row justify-content-center">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Apex</h5>
-                            <p>R$: 350,00</p>
-                            <a href="#" class="btn btn-purple">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="margin-top: 100px; margin-bottom: 100px">
-                <div class="row justify-content-center">
-                <div class="card" style="width: 18rem;">
-                        <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Apex</h5>
-                            <p>R$: 350,00</p>
-                            <a href="#" class="btn btn-purple">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -107,26 +55,44 @@
         </div>
         <div class="row justify-content-between">
             <div class="card col-md-3">
-                <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
+            <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $p1[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Apex</h5>
-                    <p>R$: 350,00</p>
+                    <h5 class="card-title">
+                        <?php echo $p1[3] ?>
+                    </h5>
+                    <p>R$:
+                        <?php echo $p1[7] ?>
+                    </p>
                     <a href="#" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
             <div class="card col-md-3">
-                <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
+            <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $p2[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Apex</h5>
-                    <p>R$: 350,00</p>
+                    <h5 class="card-title">
+                        <?php echo $p2[3] ?>
+                    </h5>
+                    <p>R$:
+                        <?php echo $p2[7] ?>
+                    </p>
                     <a href="#" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
             <div class="card col-md-3">
-                <img src="./img/apex_legends_desktop_wallpaper1.jpg" class="card-img-top" alt="...">
+            <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $p3[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Apex</h5>
-                    <p>R$: 350,00</p>
+                    <h5 class="card-title">
+                        <?php echo $p3[3] ?>
+                    </h5>
+                    <p>R$:
+                        <?php echo $p3[7] ?>
+                    </p>
                     <a href="#" class="btn btn-purple">Comprar</a>
                 </div>
             </div>

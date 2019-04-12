@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -20,66 +20,44 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
-    <title>Perfil</title>
+    <title>Login Funcionário</title>
 </head>
 
 <body>
-    <?php
-    require_once('./utils/nav_user.php');
-    if (!isset($_SESSION['idcliente']) && empty($_SESSION['idcliente'])) {
-        header("Location: login.php");
-    }
-    ?>
+<?php
+require_once('./utils/nav_func_login.php');
+if (isset($_SESSION['idfuncionario']) && !empty($_SESSION['idfuncionario'])) {
+    header("Location: painel_func.php");
+}
+?>
     <div class="container login">
         <div class="row justify-content-center align-items-center flex-column">
-            <h2>Atualizar dados</h2>
+        <h2>Painel Funcionário</h2>
             <form class="col-md-5 bg-light pb-2 pt-2" method="POST">
-                <?php
-                if (isset($_POST['id'])) {
-
-                    $update = $user->getClienteID($id);
-
-                    $id = addslashes($_POST['id']);
-                    $nome = addslashes($_POST['nome']);
-                    $email = empty($_POST['email']) ? $update[3] : addslashes($_POST['email']);
-                    $telefone = addslashes($_POST['telefone']);
-                    $senha = empty($_POST['senha']) ? $update[2] : md5(addslashes($_POST['senha']));
-                    ?>
-                <div class="alert alert-success" role="alert">
-                    <?php
-                    $user->update($id, $nome, $email, $telefone, $senha);
-                    ?>
-                </div>
-                <?php
-
-            } ?>
-            <?php $u = $user->getClienteID($id); ?>
-                <div class="form-group">
-                    <input type="hidden" name="id" class="form-control" value="<?php echo $u[0]; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" class="form-control" placeholder="Digite seu nome" value="<?php echo $u[1]; ?>">
-                </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Digite seu E-mail" value="<?php echo $u[3]; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="telefone">telefone</label>
-                    <input type="tel" name="telefone" class="form-control" placeholder="Digite seu telefone" value="<?php echo $u[4]; ?>">
+                    <?php
+                    if (isset($_POST['email']) && isset($_POST['senha'])) {
+                        $email = addslashes($_POST['email']);
+                        $senha = md5(addslashes($_POST['senha']));
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                                <?php
+                                $func->login($email, $senha);
+                                ?>
+                            </div>
+                        <?php
+                    } ?>
+                    <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Digite seu E-mail">
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
                     <input type="password" name="senha" class="form-control" placeholder="Digite sua Senha">
                 </div>
-                <button type="submit" class="btn btn-purple">Atualizar</button>
+                <button type="submit" class="btn btn-purple">Entrar</button>
             </form>
         </div>
     </div>
-    <?php
-    require_once('./utils/footer.php');
-    ?>
 </body>
 
 <!-- Javascript -->

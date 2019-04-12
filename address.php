@@ -56,7 +56,7 @@
                         ?>
                         <div class="alert alert-success" role="alert">
                         <?php
-                            $user->updateAddress($id, $endereco, $bairro, $cep, $cidade, $uf);
+                        $user->updateAddress($id, $endereco, $bairro, $cep, $cidade, $uf);
                         ?>
                         </div>
                         <?php
@@ -67,7 +67,7 @@
                 }
                 ?>
                 <?php 
-                $u = $user->getClienteID($id); 
+                $u = $user->getClienteID($id);
                 $e = $user->getAddressID($id);
                 ?>
                 <div class="form-group">
@@ -91,7 +91,8 @@
                 </div>
                 <div class="form-group">
                     <label for="uf">Cidade</label>
-                    <select class="form-control" name="uf" placeholder="Escolha uma cidade" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[6]) : '' ?>">
+                    <select class="form-control" name="uf" placeholder="Escolha uma cidade">
+                        <option <?php echo sizeof($e) > 0 ? utf8_encode($e[6]) : '' ?>><?php echo sizeof($e) > 0 ? utf8_encode($e[6]) : 'Selecione uma UF' ?></option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>

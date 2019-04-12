@@ -67,6 +67,20 @@ body {
     margin: 0 10px;
 }
 
+.func-painel {
+    padding: 50px 15px;
+}
+
+.func-painel h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.func-painel form {
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
 .btn-purple {
     background-color: #3d006e;
     color: #fff;
@@ -79,7 +93,7 @@ body {
 }
 
 .card {
-    margin: 10px 15px;
+    margin: 10px 25px;
     padding: 0;
 }
 
