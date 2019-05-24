@@ -63,9 +63,9 @@
                         <?php echo $p1[3] ?>
                     </h5>
                     <p>R$:
-                        <?php echo $p1[7] ?>
+                        <?php echo $p1[6] ?>
                     </p>
-                    <a href="#" class="btn btn-purple">Comprar</a>
+                    <a href="produto?id=<?php echo $p1[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
             <div class="card col-md-3">
@@ -77,9 +77,9 @@
                         <?php echo $p2[3] ?>
                     </h5>
                     <p>R$:
-                        <?php echo $p2[7] ?>
+                        <?php echo $p2[6] ?>
                     </p>
-                    <a href="#" class="btn btn-purple">Comprar</a>
+                    <a href="produto?id=<?php echo $p2[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
             <div class="card col-md-3">
@@ -91,9 +91,9 @@
                         <?php echo $p3[3] ?>
                     </h5>
                     <p>R$:
-                        <?php echo $p3[7] ?>
+                        <?php echo $p3[6] ?>
                     </p>
-                    <a href="#" class="btn btn-purple">Comprar</a>
+                    <a href="produto?id=<?php echo $p3[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
         </div>

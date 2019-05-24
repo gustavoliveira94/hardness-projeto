@@ -14,10 +14,10 @@ if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
         <div class="-col-md-6">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link" href="clientes.php">Buscar Clientes</a>
+                    <a class="nav-link" href="clientes.php">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="func_cadastro_produtos.php">Cadastrar Produtos</a>
+                    <a class="nav-link" href="func_cadastro_produtos.php">Produtos</a>
                 </li>
                 <?php 
                 $id = $_SESSION['idfuncionario'];
@@ -25,7 +25,10 @@ if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
                 if ($funcionario[15] == 1) {
                     ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="cadastro_func.php">Cadastrar Funcionário</a>
+                    <a class="nav-link" href="func_cadastro_func.php">Funcionário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="func_cadastro_fornecedor.php">Fornecedor</a>
                 </li>
                 <?php 
             } ?>

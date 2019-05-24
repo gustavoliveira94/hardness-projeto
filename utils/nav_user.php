@@ -36,6 +36,9 @@ session_start();
                             ?>
                         </a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="carrinho.php">Carrinho</a>
+                        </div>
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" href="logout.php">Sair</a>
                         </div>
                     </li>

@@ -20,7 +20,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
-    <title>Produtos</title>
+    <title>HardNess - Produtos</title>
 </head>
 
 <body>
@@ -78,7 +78,7 @@
                     ?>
             <div class="card col-md-3">
                 <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
-                    <img src="./img/<?php echo $produtos[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                    <img src="./img/<?php echo $produtos[5] ?>" alt="<?php echo $produtos[2] ?>" style="height: 150px; max-width: 220px;">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -87,7 +87,7 @@
                     <p>R$:
                         <?php echo $produtos[6] ?>
                     </p>
-                    <a href="#" class="btn btn-purple">Comprar</a>
+                    <a href="produto?id=<?php echo $produtos[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
             <?php
@@ -101,7 +101,7 @@
                 ?>
             <div class="card col-md-3">
                 <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
-                    <img src="./img/<?php echo $produtos[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                    <img src="./img/<?php echo $produtos[5] ?>" alt="<?php echo $produtos[2] ?>" style="height: 180px; max-width: 300px;">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -110,7 +110,7 @@
                     <p>R$:
                         <?php echo $produtos[6] ?>
                     </p>
-                    <a href="#" class="btn btn-purple">Comprar</a>
+                    <a href="produto?id=<?php echo $produtos[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
             <?php

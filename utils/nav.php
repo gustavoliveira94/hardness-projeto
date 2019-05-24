@@ -17,16 +17,16 @@ include '/../classes/user.class.php';
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Jogos</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?produtocategoria=midiadigital">Mídia Digital</a>
-                        <a class="dropdown-item" href="?produtocategoria=midiafisica">Mídia Física</a>
+                        <a class="dropdown-item" href="produtos?produtocategoria=midiadigital">Mídia Digital</a>
+                        <a class="dropdown-item" href="produtos?produtocategoria=midiafisica">Mídia Física</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Acessórios</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?produtocategoria=consoles">Consoles</a>
-                        <a class="dropdown-item" href="?produtocategoria=computadores">Computadores</a>
-                        <a class="dropdown-item" href="?produtocategoria=ovr">Óculos Realidade Virtual</a>
+                        <a class="dropdown-item" href="produtos?produtocategoria=consoles">Consoles</a>
+                        <a class="dropdown-item" href="produtos?produtocategoria=computadores">Computadores</a>
+                        <a class="dropdown-item" href="produtos?produtocategoria=ovr">Óculos Realidade Virtual</a>
                     </div>
                 </li>
             </ul>
@@ -49,6 +49,7 @@ include '/../classes/user.class.php';
                             ?>
                         </a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="carrinho.php">Carrinho</a>
                             <a class="dropdown-item" href="profile.php">Meus Dados</a>
                             <a class="dropdown-item" href="logout.php">Sair</a>
                         </div>

@@ -74,6 +74,25 @@ class Produtos
         }
     }
 
+    public function createFornecedor($nome, $ie, $cnpj, $email, $telefone, $endereco, $bairro, $cep, $cidade, $uf, $status = 1)
+    {
+        $sql = "INSERT INTO fornecedor (nome, ie, cnpj, email, telefone, endereco, bairro, cep, cidade, uf, status) VALUES (:nome, :ie, :cnpj, :email, :telefone, :endereco, :bairro, :cep, :cidade, :uf, :status)";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':nome', $nome);
+        $sql->bindValue(':ie', $ie);
+        $sql->bindValue(':cnpj', $cnpj);
+        $sql->bindValue(':email', $email);
+        $sql->bindValue(':telefone', $telefone);
+        $sql->bindValue(':endereco', $endereco);
+        $sql->bindValue(':bairro', $bairro);
+        $sql->bindValue(':cep', $cep);
+        $sql->bindValue(':cidade', $cidade);
+        $sql->bindValue(':uf', $uf);
+        $sql->bindValue(':status', $status);
+        $sql->execute();
+        header("Location: painel_func.php");
+    }
+
     public function getFornecedor()
     {
         $sql = 'SELECT * FROM fornecedor';
