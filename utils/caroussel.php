@@ -22,7 +22,7 @@ $p3 = $produto->getProdutosID(48);
                             <?php echo $p1[2] ?>
                         </h5>
                         <p>R$:
-                            <?php echo $p1[6] ?>
+                            <?php echo number_format($p1[6], 2, ',', '.') ?>
                         </p>
                         <a href="produto?id=<?php echo $p1[0] ?>" class="btn btn-purple">Comprar</a>
                     </div>
@@ -40,7 +40,7 @@ $p3 = $produto->getProdutosID(48);
                             <?php echo $p2[2] ?>
                         </h5>
                         <p>R$:
-                            <?php echo $p2[6] ?>
+                        <?php echo number_format($p2[6], 2, ',', '.') ?>
                         </p>
                         <a href="produto?id=<?php echo $p2[0] ?>" class="btn btn-purple">Comprar</a>
                     </div>
@@ -58,7 +58,7 @@ $p3 = $produto->getProdutosID(48);
                             <?php echo $p3[2] ?>
                         </h5>
                         <p>R$:
-                            <?php echo $p3[6] ?>
+                        <?php echo number_format($p3[6], 2, ',', '.') ?>
                         </p>
                         <a href="produto?id=<?php echo $p3[0] ?>" class="btn btn-purple">Comprar</a>
                     </div>

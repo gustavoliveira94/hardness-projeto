@@ -40,10 +40,18 @@ class Produtos
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            return $cliente = $sql->fetchAll();
+            return $produto = $sql->fetchAll();
         } else {
             return 'Não encontrado!';
         }
+    }
+
+    public function getProdutosRecentes()
+    {
+        $sql = 'SELECT * FROM produto ORDER BY idproduto DESC limit 0, 3';
+        $sql = $this->pdo->prepare($sql);
+        $sql->execute();
+        return $produto = $sql->fetchAll();
     }
 
     public function getProdutosID($id)
@@ -54,7 +62,7 @@ class Produtos
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            return $cliente = $sql->fetch();
+            return $produto = $sql->fetch();
         } else {
             return 'Não encontrado!';
         }
@@ -68,7 +76,7 @@ class Produtos
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            return $cliente = $sql->fetchAll();
+            return $produto = $sql->fetchAll();
         } else {
             return 'Não encontrado!';
         }
@@ -103,6 +111,87 @@ class Produtos
             return $fornecedor = $sql->fetchAll();
         } else {
             return 'Não encontrado!';
+        }
+    }
+
+    public function createEstoque($quantidade, $ucompra, $ucusto, $idproduto)
+    {
+        $sql = 'SELECT * FROM estoque WHERE idproduto = :idproduto';
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':idproduto', $idproduto);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $sqlupdate = "UPDATE estoque SET quantidade = quantidade + :quantidade, ultimacompra = :ultimacompra, ultimocusto = :ultimocusto WHERE idproduto = :idproduto";
+            $sqlupdate = $this->pdo->prepare($sqlupdate);
+            $sqlupdate->bindValue(':quantidade', $quantidade);
+            $sqlupdate->bindValue(':ultimacompra', $ucompra);
+            $sqlupdate->bindValue(':ultimocusto', $ucusto);
+            $sqlupdate->bindValue(':idproduto', $idproduto);
+            $sqlupdate->execute();
+            header("Location: painel_func.php");
+        } else {
+            $sqlinsert = "INSERT INTO estoque (quantidade, ultimacompra, ultimocusto, idproduto) VALUES (:quantidade, :ultimacompra, :ultimocusto, :idproduto)";
+            $sqlinsert = $this->pdo->prepare($sqlinsert);
+            $sqlinsert->bindValue(':quantidade', $quantidade);
+            $sqlinsert->bindValue(':ultimacompra', $ucompra);
+            $sqlinsert->bindValue(':ultimocusto', $ucusto);
+            $sqlinsert->bindValue(':idproduto', $idproduto);
+            $sqlinsert->execute();
+            header("Location: painel_func.php");
+        }
+    }
+
+    public function decremetarEstoque($quantidade, $idproduto)
+    {
+        $sql = "UPDATE estoque SET quantidade = quantidade - :quantidade WHERE idproduto = :idproduto";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':quantidade', $quantidade);
+        $sql->bindValue(':idproduto', $idproduto);
+        $sql->execute();
+    }
+
+    public function getAllEstoque()
+    {
+        $sqlestoque = 'SELECT * FROM estoque ORDER BY quantidade ASC';
+        $sqlestoque = $this->pdo->prepare($sqlestoque);
+        $sqlestoque->execute();
+        $estoque = $sqlestoque->fetchAll();
+
+        return $estoque;
+    }
+
+    public function getEstoque($idproduto, $quantidade)
+    {
+        $sqlestoque = 'SELECT * FROM estoque WHERE idproduto = :idproduto';
+        $sqlestoque = $this->pdo->prepare($sqlestoque);
+        $sqlestoque->bindValue(':idproduto', $idproduto);
+        $sqlestoque->execute();
+        $estoque = $sqlestoque->fetch();
+
+        $sqlproduto = 'SELECT * FROM produto WHERE idproduto = :idproduto';
+        $sqlproduto = $this->pdo->prepare($sqlproduto);
+        $sqlproduto->bindValue(':idproduto', $idproduto);
+        $sqlproduto->execute();
+        $produto = $sqlproduto->fetch();
+
+        if ($estoque[1] < $quantidade) {
+            echo 'Quantidade do produto ' . $produto[2] . ' disponível no estoque é de ' . $estoque[1];
+        }
+    }
+
+    public function getEstoque2($idproduto, $quantidade)
+    {
+        $sql = 'SELECT * FROM estoque WHERE idproduto = :idproduto';
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':idproduto', $idproduto);
+        $sql->execute();
+        $estoque = $sql->fetch();
+
+        if ($estoque[1] < $quantidade) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

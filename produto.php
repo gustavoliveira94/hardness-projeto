@@ -51,7 +51,7 @@
                     <hr>
                     <div class="card-body">
                         <div class="col-md-6">
-                            <h3><small style="font-size: 16px;">R$:</small> <?php echo $p[6] ?></h3>
+                            <h3><small style="font-size: 16px;">R$:</small> <?php echo number_format($p[6], 2, ',', '.') ?></h3>
                         </div>
                         <div class="col-md-6">
                             <a href="carrinho.php?id=<?php echo $p[0] ?>" class="btn btn-success">COMPRAR</a>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -20,48 +20,60 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
-    <title>Login</title>
+    <title>Controle - Produtos</title>
 </head>
 
 <body>
-<?php
-require_once('./utils/nav.php');
-if (isset($_SESSION['idcliente']) && !empty($_SESSION['idcliente'])) {
-    header("Location: index.php");
-}
-?>
-    <div class="container login">
-        <div class="row justify-content-center align-items-center flex-column">
-        <h2>Entrar</h2>
-            <form class="col-md-5 bg-light pb-2 pt-2" method="POST">
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <?php
-                    if (isset($_POST['email']) && isset($_POST['senha'])) {
-                        $email = addslashes($_POST['email']);
-                        $senha = md5(addslashes($_POST['senha']));
-                        ?>
-                        <div class="alert alert-danger" role="alert">
-                                <?php
-                                    $user->login($email, $senha);
-                                ?>
-                            </div>
-                        <?php 
-                    } ?>
-                    <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Digite seu E-mail">
-                </div>
-                <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" class="form-control" placeholder="Digite sua Senha">
-                </div>
-                <button type="submit" class="btn btn-purple">Entrar</button>
-                <a href="cadastro.php">Não tem cadastro? Cadastre-se</a>
-            </form>
-        </div>
-    </div>
     <?php
-    require_once('./utils/footer.php');
+    require_once('./utils/nav_func.php');
+    include './classes/produtos.class.php';
+    include './classes/venda.class.php';
+    if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
+        header("Location: login_func.php");
+    }
     ?>
+    <div class="container func-painel">
+        <div class="row justify-content-center align-items-center flex-column">
+            <h2>Controle de Produtos Vendidos</h2>
+                <?php
+                    $v = $venda->getItemVendaQtd();
+                    ?>
+                    <?php if ($v == 'Não encontrado!') { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php
+                    echo $v;
+                    ?>
+                </div>
+                <?php
+        } 
+        foreach($v as $index => $vendas) {
+            $p = $produto->getProdutosID($vendas[0]);
+            ?>
+            <table class="table table-striped table-light col-md-8">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Produto</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><?php echo $index + 1 ?></th>
+                    <td><?php echo $vendas[0] ?></td>
+                    <td><?php echo $p[2] ?></td>
+                    <td><?php echo $vendas[1] ?></td>
+                  </tr>
+                </tbody>
+            </table>
+        <?php
+        }
+        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 <!-- Javascript -->

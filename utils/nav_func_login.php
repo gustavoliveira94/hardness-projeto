@@ -1,5 +1,5 @@
 <?php
-include '/../classes/func.class.php';
+include './classes/func.class.php';
 session_start()
 ?>
 <div class="container-fluid menu">

@@ -1,5 +1,5 @@
 <?php
-include '/../classes/func.class.php';
+include './classes/func.class.php';
 session_start();
 require_once('./utils/nav_func.php');
 if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
@@ -9,7 +9,7 @@ if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
 <div class="container-fluid menu">
     <div class="row justify-content-center align-items-center nav-top">
         <div class="col-md-3 text-center">
-            <a href="index.php" id="logo">HARDNESS</a>
+            <a href="painel_func.php" id="logo">HARDNESS</a>
         </div>
         <div class="-col-md-6">
             <ul class="nav nav-pills">
@@ -27,11 +27,26 @@ if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="func_cadastro_func.php">Funcionário</a>
                 </li>
+                <?php 
+            } ?>
                 <li class="nav-item">
                     <a class="nav-link" href="func_cadastro_fornecedor.php">Fornecedor</a>
                 </li>
-                <?php 
-            } ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="func_cadastro_estoque.php">Estoque</a>
+                </li>
+                <li class="nav-item">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            Relatórios
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="controlar_produtos.php">Produtos Vendidos</a>
+                            <a class="dropdown-item" href="controlar_estoque.php">Controle de Estoque</a>
+                            <a class="dropdown-item" href="controlar_vendas.php">Controle de Vendas</a>
+                        </div>
+                    </li>
+                </li>
             </ul>
         </div>
         <div class="col-md-3">

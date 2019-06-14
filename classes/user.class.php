@@ -90,7 +90,7 @@ class Users
         $sql = $this->pdo->query($sql);
 
         if ($sql->rowCount() > 0) {
-            return print_r($sql->fetchAll());
+            return $sql->fetchAll();
         } else {
             return array();
         }

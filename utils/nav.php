@@ -1,5 +1,5 @@
 <?php
-include '/../classes/user.class.php';
+include './classes/user.class.php';
 ?>
 <div class="container-fluid menu">
     <div class="row justify-content-center align-items-center nav-top">
@@ -36,6 +36,7 @@ include '/../classes/user.class.php';
                 <li class="nav-item">
                     <?php
                     session_start();
+                    ob_start();
                     if (isset($_SESSION['idcliente']) && !empty($_SESSION['idcliente'])) {
                         $id = $_SESSION['idcliente'];
                         ?>
@@ -56,8 +57,15 @@ include '/../classes/user.class.php';
                     </li>
                     <?php 
                 } else { ?>
-                    <a class="nav-link" href="login.php">
-                        <i class="fas fa-user-circle"></i>Login</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="login.php">Login</a>
+                            <a class="dropdown-item" href="carrinho.php">Carrinho</a>
+                        </div>
+                    </li>
                     <?php 
                 } ?>
                 </li>

@@ -54,48 +54,22 @@
             </div>
         </div>
         <div class="row justify-content-between">
+            <?php foreach($produto->getProdutosRecentes() as $produtos) { ?>
             <div class="card col-md-3">
-            <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
-                    <img src="./img/<?php echo $p1[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
+                <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $produtos[5] ?>" alt="..." style="height: 100%; max-width: 250px;">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <?php echo $p1[3] ?>
+                        <?php echo $produtos[2] ?>
                     </h5>
                     <p>R$:
-                        <?php echo $p1[6] ?>
+                        <?php echo number_format($produtos[6], 2, ',', '.') ?>
                     </p>
-                    <a href="produto?id=<?php echo $p1[0] ?>" class="btn btn-purple">Comprar</a>
+                    <a href="produto?id=<?php echo $produtos[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
-            <div class="card col-md-3">
-            <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
-                    <img src="./img/<?php echo $p2[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <?php echo $p2[3] ?>
-                    </h5>
-                    <p>R$:
-                        <?php echo $p2[6] ?>
-                    </p>
-                    <a href="produto?id=<?php echo $p2[0] ?>" class="btn btn-purple">Comprar</a>
-                </div>
-            </div>
-            <div class="card col-md-3">
-            <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
-                    <img src="./img/<?php echo $p3[5] ?>" alt="..." style="height: 180px; max-width: 300px;">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <?php echo $p3[3] ?>
-                    </h5>
-                    <p>R$:
-                        <?php echo $p3[6] ?>
-                    </p>
-                    <a href="produto?id=<?php echo $p3[0] ?>" class="btn btn-purple">Comprar</a>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
     <?php

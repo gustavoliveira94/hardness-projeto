@@ -19,7 +19,7 @@ class Carrinho
         if ($sql->rowCount() > 0) {
             $produto = $sql->fetch();
 
-            if (sizeof($_SESSION['carrinho']) < 1) {
+            if (sizeof(@$_SESSION['carrinho']) < 1) {
                 $_SESSION['carrinho'] = array();
             }
 
@@ -32,6 +32,7 @@ class Carrinho
     public function removeCarrinho($index)
     {
         unset($_SESSION['carrinho'][$index]);
+        header("Location: carrinho.php");
     }
 }
 

@@ -20,7 +20,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
-    <title>Perfil</title>
+    <title>Produto</title>
 </head>
 
 <body>

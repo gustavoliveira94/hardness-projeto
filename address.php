@@ -86,7 +86,7 @@
                     <input type="text" name="cep" class="form-control" placeholder="Digite seu CEP" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[4]) : '' ?>">
                 </div>
                 <div class="form-group">
-                    <label for="cidade">Cidade</label>
+                    <label for="cidade">Estado</label>
                     <input type="text" name="cidade" class="form-control" placeholder="Digite sua cidade" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[5]) : '' ?>">
                 </div>
                 <div class="form-group">

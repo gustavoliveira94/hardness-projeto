@@ -30,15 +30,16 @@
     include './classes/carrinho.class.php';
     if (isset($_GET['id'])) {
         @$id = $_GET['id'];
-        $c = $_SESSION['carrinho'];
+        @$c = $_SESSION['carrinho'];
         $p1 = $produto->getProdutosID($id);
         $p2 = $carrinho->addCarrinho($id);
 
-        if (in_array($p1, $c)) {
+        if (in_array($p1, $_SESSION['carrinho'])) {
 
         } else {
             array_push($_SESSION['carrinho'], $p1);
         }
+
     }
     ?>
     <div class="container">
@@ -55,39 +56,56 @@
                             foreach ($c as $index => $produtos_carrinho) {
                                 ?>
                         <div class="container">
-                            <div class="card">
-                                <div class="row no-gutters">
-                                    <div class="col-md-4" style="display: flex; align-items: center; padding: 5px;">
-                                        <img style="max-width: 100px;" src="./img/<?php echo $produtos_carrinho[5] ?>" class="card-img" alt="<?php echo $produtos_carrinho[2] ?>">
-                                    </div>
-                                    <div class="col-md-4" style="height: 100px; display: flex; align-items: center;">
-                                        <div class="card-body" style="height: 100px; display: flex; align-items: center;">
-                                            <h5 class="card-title" style="margin: 0;"><?php echo $produtos_carrinho[2] ?></h5>
+                            <form method="get" action="finalizar_compra.php">
+                                <div class="card">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-3" style="height: 120px; display: flex; align-items: center; padding: 5px;">
+                                            <img style="max-width: 65%; max-height: 100%;" src="./img/<?php echo $produtos_carrinho[5] ?>" class="card-img" alt="<?php echo $produtos_carrinho[2] ?>">
                                         </div>
-                                    </div>
-                                    <div class="col-md-3" style="height: 100px; display: flex; align-items: center;">
-                                        <div class="card-body" style="height: 100px; display: flex; align-items: center;">
-                                            <h5 class="card-title" style="margin: 0;">R$: <?php echo $produtos_carrinho[6] ?></h5>
+                                        <div class="col-md-3" style="height: 120px; display: flex; align-items: center;">
+                                            <div class="card-body" style="height: 120px; display: flex; align-items: center;">
+                                                <h5 class="card-title" style="margin: 0;">
+                                                    <?php echo $produtos_carrinho[2] ?>
+                                                </h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-1" style="height: 100px; display: flex; align-items: center;">
-                                        <a href="?idremove=<?php echo $index; ?>">
-                                            <i style="color: red" class="fas fa-minus-circle"></i>
-                                        </a>
+                                        <div class="col-md-2" style="height: 120px; display: flex; align-items: center;">
+                                            <div class="card-body" style="height: 100px; display: flex; align-items: center;">
+                                                <select class="form-control" name="qtd<?php echo $index ?>">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" style="height: 120px; display: flex; align-items: center;">
+                                            <div class="card-body" style="height: 100px; display: flex; align-items: center;">
+                                                <h5 class="card-title" style="margin: 0;">R$:
+                                                    <?php echo number_format($produtos_carrinho[6], 2, ',', '.') ?>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1" style="height: 120px; display: flex; align-items: center;">
+                                            <a href="?idremove=<?php echo $index; ?>" id="remove">
+                                                <i style="color: red" class="fas fa-minus-circle"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                         <?php
                         if (isset($_GET['idremove']) && $_GET['idremove'] == $index) {
                             $carrinho->removeCarrinho($index);
-                            header("Location: carrinho.php");
                         }
                     }
                 } ?>
                         <div class="col-md-12" style="display: flex; justify-content: flex-end; align-items: center; margin-top: 50px; margin-bottom: -50px;">
-                            <button type="button" class="btn btn-success">COMPRAR</button>
+                            <a style="margin-right: 30px;" href="produtos.php">Continuar comprando</a>
+                            <button type="submit" class="btn btn-success">CONTINUAR</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

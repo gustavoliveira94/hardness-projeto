@@ -20,47 +20,63 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
-    <title>Painel Funcionário</title>
+    <title>Controle - Vendas</title>
 </head>
 
 <body>
     <?php
     require_once('./utils/nav_func.php');
     include './classes/produtos.class.php';
+    include './classes/venda.class.php';
     include './classes/user.class.php';
     if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
         header("Location: login_func.php");
     }
-    $p = $produto->getProdutos();
-    $u = $user->getCliente();
     ?>
-    <div class="container login" style="margin-top: -60px;">
-        <div class="row justify-content-center align-items-center">
-            <h2>Informações da Loja</h2>
-        </div>
-        <div class="row justify-content-center align-items-center">
-            <div class="card col-md-8">
-                <div class="card-header">
-                    Produtos
+    <div class="container func-painel">
+        <div class="row justify-content-center align-items-center flex-column" style="padding: 0 15px;">
+            <h2>Controle de Vendas</h2>
+                <?php
+                    $v = $venda->getAllVenda();
+                    ?>
+                    <?php if ($v == 'Não encontrado!') { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php
+                    echo $v;
+                    ?>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Nossa loja tem: </h5>
-                    <p class="card-text"><?php echo sizeof($p) ?> produtos cadastrados!</p>
+                <?php
+        } ?>
+            <?php
+        foreach($v as $index => $vendas) {
+                $u = $user->getClienteID($vendas[1])
+            ?>
+
+            <table class="table table-striped table-light col-md-8">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Venda</th>
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Valor Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><?php echo $index + 1 ?></th>
+                    <td><?php echo $vendas[0] ?></td>
+                    <td><?php echo $vendas[1] ?> - <a href="clientes.php?email=<?php echo $u[3] ?>&item=<?php echo $vendas[0] ?>">Detalhes</a></td>
+                    <td style="width: 280px;">R$ <?php echo number_format($vendas[2], 2, ',', '.') ?></td>
+                  </tr>
+                </tbody>
+            </table>
+        <?php
+        }
+        ?>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center align-items-center">
-            <div class="card col-md-8">
-                <div class="card-header">
-                    Clientes
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Nossa loja tem: </h5>
-                    <p class="card-text"><?php echo sizeof($u) ?> usuários cadastrados!</p>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 <!-- Javascript -->
