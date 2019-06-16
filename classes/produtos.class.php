@@ -161,6 +161,16 @@ class Produtos
         return $estoque;
     }
 
+    public function getEstoque0()
+    {
+        $sqlestoque = 'SELECT * FROM estoque WHERE quantidade = 0';
+        $sqlestoque = $this->pdo->prepare($sqlestoque);
+        $sqlestoque->execute();
+        $estoque = $sqlestoque->fetchAll();
+
+        return sizeof($estoque);
+    }
+
     public function getEstoque($idproduto, $quantidade)
     {
         $sqlestoque = 'SELECT * FROM estoque WHERE idproduto = :idproduto';

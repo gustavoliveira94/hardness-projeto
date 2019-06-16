@@ -36,47 +36,144 @@
     <div class="container func-painel">
         <div class="row justify-content-center align-items-center flex-column" style="padding: 0 15px;">
             <h2>Controle de Vendas</h2>
+            <?php
+            $v = $venda->getAllVenda();
+            $mes = $venda->getVendaMes(@$_GET['mes']);
+            ?>
+            <?php if ($v == 'Não encontrado!') { ?>
+            <div class="alert alert-danger" role="alert">
                 <?php
-                    $v = $venda->getAllVenda();
-                    ?>
-                    <?php if ($v == 'Não encontrado!') { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php
-                    echo $v;
-                    ?>
-                </div>
-                <?php
+                echo $v;
+                ?>
+            </div>
+            <?php
+
         } ?>
             <?php
-        foreach($v as $index => $vendas) {
-                $u = $user->getClienteID($vendas[1])
+            if (!@$_GET['mes']) {
+                foreach ($v as $index => $valor) {
+                    @$total = $valor[3] + $total;
+                }
+            } else {
+                foreach ($mes as $index => $valor) {
+                    @$total = $valor[3] + $total;
+                }
+            }
             ?>
+            <div class="card col-md-8">
+                <div style="display: flex;">
+                    <h5 class="card-header col-md-6" style="display: flex; align-items: center; font-size: 16px;">Valor Total das Vendas: R$
+                        <?php echo number_format($total, 2, ',', '.') ?>
+                    </h5>
+                    <div class="card-header col-md-6" style="display: flex; align-items: center;">
+                        <p style="margin: 0">Filtrar:</p>
+                        <form method="get" style="display: flex; align-items: center;">
+                            <select name="mes" class="form-control" style="margin-left: 10px; width: auto;">
+                                <option value="01">Janeiro</option>
+                                <option value="02">Fevereiro</option>
+                                <option value="03">Março</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Maio</option>
+                                <option value="06">Junho</option>
+                                <option value="07">Julho</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                            <button class="btn btn-success" type="submit">Filtrar</button>
+                        </form>
+                        <a href="controlar_vendas.php">Limpar</a>
+                    </div>
+                </div>
+                <a href="./relatorios/relatorio_vendas.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
+            </div>
+            <?php
+            if (!@$_GET['mes']) {
+                foreach ($v as $index => $vendas) {
+                    $u = $user->getClienteID($vendas[1]);
+                    ?>
 
             <table class="table table-striped table-light col-md-8">
                 <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ID Venda</th>
-                    <th scope="col">ID Cliente</th>
-                    <th scope="col">Valor Total</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Venda</th>
+                        <th scope="col">Data da Venda</th>
+                        <th scope="col">ID Cliente</th>
+                        <th scope="col">Valor Total</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"><?php echo $index + 1 ?></th>
-                    <td><?php echo $vendas[0] ?></td>
-                    <td><?php echo $vendas[1] ?> - <a href="clientes.php?email=<?php echo $u[3] ?>&item=<?php echo $vendas[0] ?>">Detalhes</a></td>
-                    <td style="width: 280px;">R$ <?php echo number_format($vendas[2], 2, ',', '.') ?></td>
-                  </tr>
+                    <tr>
+                        <th scope="row">
+                            <?php echo $index + 1 ?>
+                        </th>
+                        <td>
+                            <?php echo $vendas[0] ?>
+                        </td>
+                        <td>
+                            <?php echo implode('/', array_reverse(explode('-', $vendas[1]))) ?>
+                        </td>
+                        <td>
+                            <?php echo $vendas[2] ?> -
+                            <a href="clientes.php?email=<?php echo $u[3] ?>&item=<?php echo $vendas[0] ?>">Detalhes</a>
+                        </td>
+                        <td>R$
+                            <?php echo number_format($vendas[3], 2, ',', '.') ?>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-        <?php
+            <?php
+
         }
-        ?>
-                    </div>
-                </div>
-            </div>
+    } else if (@$_GET['mes']) {
+        foreach ($mes as $index => $vendas) {
+            $u = $user->getClienteID($vendas[1]);
+            ?>
+
+        <table class="table table-striped table-light col-md-8">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Venda</th>
+                    <th scope="col">Data da Venda</th>
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Valor Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <?php echo $index + 1 ?>
+                    </th>
+                    <td>
+                        <?php echo $vendas[0] ?>
+                    </td>
+                    <td>
+                        <?php echo implode('/', array_reverse(explode('-', $vendas[1]))) ?>
+                    </td>
+                    <td>
+                        <?php echo $vendas[2] ?> -
+                        <a href="clientes.php?email=<?php echo $u[3] ?>&item=<?php echo $vendas[0] ?>">Detalhes</a>
+                    </td>
+                    <td>R$
+                        <?php echo number_format($vendas[3], 2, ',', '.') ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <?php
+
+    }
+}
+?>
         </div>
+    </div>
+    </div>
+    </div>
 </body>
 
 <!-- Javascript -->

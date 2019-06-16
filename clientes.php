@@ -117,7 +117,9 @@
 
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
-                                        <?php echo "Valor total: " . number_format($venda[2], 2, ',', '.') ?>
+                                        <?php echo "<b>Valor total:</b> R$" . number_format($venda[3], 2, ',', '.') ?>
+                                        <br/>
+                                        <?php echo "<b>Data da compra:</b> " . implode('/', array_reverse(explode('-', $venda[1]))) ?>
                                     </div>
                                     <div class="card-body">
                                         <a href="clientes.php?email=<?php echo $f[3] ?>&item=<?php echo $venda[0] ?>" class="btn btn-primary" type="button">

@@ -27,8 +27,9 @@
     <?php
     require_once('./utils/nav.php');
     require_once('./utils/caroussel.php');
+    include './classes/venda.class.php';
     ?>
-    <div class="container">
+    <div class="container-fluid facebook-content">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form>
@@ -38,6 +39,33 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+    <div class="container pb-5 pt-5">
+        <div class="row">
+            <div class="alert alert-dark col-md-6 ml-2 mr-2" role="alert">
+                Top 3 produtos mais vendidos!
+            </div>
+        </div>
+        <div class="row justify-content-between">
+            <?php foreach($venda->getItemVendaTop() as $produtos) { 
+                $p = $produto->getProdutosID($produtos[0]);
+            ?>
+            <div class="card col-md-3">
+                <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
+                    <img src="./img/<?php echo $p[5] ?>" alt="..." style="height: 100%; max-width: 250px;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <?php echo $p[2] ?>
+                    </h5>
+                    <p>R$:
+                        <?php echo number_format($p[6], 2, ',', '.') ?>
+                    </p>
+                    <a href="produto?id=<?php echo $p[0] ?>" class="btn btn-purple">Comprar</a>
+                </div>
+            </div>
+            <?php } ?>
         </div>
     </div>
     <div class="container-fluid facebook-content">

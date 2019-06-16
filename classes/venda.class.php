@@ -20,10 +20,11 @@ class Venda
         $sql->execute();
     }
 
-    public function venda($idcliente, $valortotal)
+    public function venda($datavenda, $idcliente, $valortotal)
     {
-        $sql = "INSERT INTO venda (idcliente, valortotal) VALUES (:idcliente, :valortotal)";
+        $sql = "INSERT INTO venda (datavenda, idcliente, valortotal) VALUES (:datavenda, :idcliente, :valortotal)";
         $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':datavenda', $datavenda);
         $sql->bindValue(':idcliente', $idcliente);
         $sql->bindValue(':valortotal', $valortotal);
         $sql->execute();
@@ -53,14 +54,13 @@ class Venda
         }
     }
 
-    public function pagamento($idvenda, $valorpago, $datapagamento, $idformapagamento)
+    public function pagamento($idvenda, $valorpago, $datapagamento)
     {
-        $sql = "INSERT INTO pagamento (idvenda, valorpago, datapagamento, idformapagamento) VALUES (:idvenda, :valorpago, :datapagamento, :idformapagamento)";
+        $sql = "INSERT INTO pagamento (idvenda, valorpago, datapagamento) VALUES (:idvenda, :valorpago, :datapagamento)";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':idvenda', $idvenda);
         $sql->bindValue(':valorpago', $valorpago);
         $sql->bindValue(':datapagamento', $datapagamento);
-        $sql->bindValue(':idformapagamento', $idformapagamento);
         $sql->execute();
     }
 
@@ -100,7 +100,22 @@ class Venda
         $sql->execute();
         $venda = $sql->fetchAll();
 
-        if ($venda > 1)
+        if ($venda > 0)
+            return $venda;
+        else {
+            'Nenhum resultado encontrado!';
+        }
+    }
+
+    public function getVendaMes($mes)
+    {
+        $sql = 'SELECT * FROM venda WHERE month(datavenda) = :mes';
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':mes', $mes);
+        $sql->execute();
+        $venda = $sql->fetchAll();
+
+        if ($venda > 0)
             return $venda;
         else {
             'Nenhum resultado encontrado!';
@@ -134,12 +149,27 @@ class Venda
 
     public function getItemVendaQtd()
     {
-        $sql = 'SELECT idproduto,
-        COUNT(idproduto) AS Qtd
+        $sql = 'SELECT idproduto, SUM(quantidade) total
         FROM  itemvenda
         GROUP BY idproduto
-        HAVING   COUNT(idproduto) > 1
-        ORDER BY COUNT(idproduto) DESC';
+        ORDER BY total DESC';
+        $sql = $this->pdo->prepare($sql);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            return $itemvenda = $sql->fetchAll();
+        } else {
+            return 'Não encontrado!';
+        }
+    }
+
+    public function getItemVendaTop()
+    {
+        $sql = 'SELECT idproduto, SUM(quantidade) total
+        FROM  itemvenda
+        GROUP BY idproduto
+        ORDER BY total DESC
+        limit 0, 3';
         $sql = $this->pdo->prepare($sql);
         $sql->execute();
 

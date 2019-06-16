@@ -45,7 +45,12 @@
                     ?>
                 </div>
                 <?php
-        } 
+        } ?>
+        <div class="card col-md-8">
+            <h5 class="card-header">Produtos mais vendidos</h5>
+            <a href="./relatorios/relatorio_produtos.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
+        </div>
+        <?php
         foreach($v as $index => $vendas) {
             $p = $produto->getProdutosID($vendas[0]);
             ?>
@@ -62,8 +67,8 @@
                   <tr>
                     <th scope="row"><?php echo $index + 1 ?></th>
                     <td><?php echo $vendas[0] ?></td>
-                    <td><?php echo $p[2] ?></td>
-                    <td><?php echo $vendas[1] ?></td>
+                    <td style="width: 250px;"><?php echo $p[2] ?></td>
+                    <td style="width: 200px;"><?php echo $vendas[1] ?></td>
                   </tr>
                 </tbody>
             </table>

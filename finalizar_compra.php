@@ -33,8 +33,6 @@
         @$c = $_SESSION['carrinho'];
         header("Location: login.php");
     }
-    print_r($_SESSION['carrinho']);
-    print_r(@$_SESSION['qtdcarrinho']);
     ?>
     <div class="container">
         <div class="row justify-content-center align-items-center">

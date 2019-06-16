@@ -36,13 +36,10 @@
     foreach ($_SESSION['carrinho'] as $index => $produtos) {
         @$total = $_SESSION['qtdcarrinho'][$index] * $_SESSION['carrinho'][$index][6] + $total;
     }
-    $venda->venda($_SESSION['idcliente'], $total);
+    $data = date('Y-m-d');
+    $venda->venda($data, $_SESSION['idcliente'], $total);
     $idvenda = $venda->getVenda($_SESSION['idcliente']);
-    $venda->formaPagamento($_SESSION['idcliente'], 'CC');
-    $formapagamento = $venda->getFormaPagamento($_SESSION['idcliente']);
-    $data = date('d/m/Y');
-    echo $formapagamento[0] . "<br/>";
-    $venda->pagamento($idvenda[0], $idvenda[2], $data, $formapagamento[0]);
+    $venda->pagamento($idvenda[0], $idvenda[2], $data);
     foreach ($_SESSION['carrinho'] as $index => $produtos) {
         @$total = $_SESSION['qtdcarrinho'][$index] * $_SESSION['carrinho'][$index][6] + $total;
         $venda->itemvenda($idvenda[0], $produtos[0], $produtos[6], $_SESSION['qtdcarrinho'][$index]);
@@ -54,20 +51,32 @@
     <div class="container">
         <div class="row justify-content-center align-items-center; background-color: #000;">
             <div class="col-md-8" style="height: calc(100vh - 200px); color: #fff; display:flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 50px;">
-                <h3>Obrigado por nos escolher!</h3>
-                <h3>Compra finalizada com sucesso.</h3>
+                <h4>Obrigado por nos escolher!</h4>
+                <h5>Compra finalizada com sucesso.</h5>
                 <br/>
-                <p>Redirecionando...</p>
+                <div class="card border-secondary mb-3" style="width: 18rem; color: #000">
+                    <div class="card-header">Dados da compra</div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Nº da compra:
+                            <?php echo $idvenda[0] ?>
+                        </h6>
+                        <p class="card-subtitle mb-2 text-muted">Valor Total: R$
+                            <?php echo number_format($idvenda[3], 2, ',', '.'); ?>
+                        </p>
+                        <a href="index.php" class="card-link">Continuar</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 
 <!-- Javascript -->
 <script>
-    setTimeout(() => {
-        window.location.href = "index.php"
-    }, 5000);
+    // setTimeout(() => {
+    //     window.location.href = "index.php"
+    // }, 5000);
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

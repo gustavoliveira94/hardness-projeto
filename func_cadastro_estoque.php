@@ -64,8 +64,17 @@
                     <input type="number" name="ucusto" class="form-control" placeholder="Digite o último custo">
                 </div>
                 <div class="form-group">
-                    <label for="idproduto">ID Produto</label>
-                    <input type="number" name="idproduto" class="form-control" placeholder="Digite o ID do produto">
+                <label for="idproduto">Produtos</label>
+                    <select class="form-control" name="idproduto" placeholder="Escolha um produto">
+                        <?php 
+                        $produtos = $produto->getProdutos();
+                        foreach ($produtos as $p) { ?>
+                        <option value="<?php echo $p[0]; ?>">
+                            <?php echo $p[2]; ?>
+                        </option>
+                        <?php 
+                    } ?>
+                    </select>
                 </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>

@@ -36,8 +36,8 @@
         <div class="row justify-content-center align-items-center flex-column" style="padding: 0 15px;">
             <h2>Controle de Estoque</h2>
                 <?php
-                    $e = $produto->getAllEstoque();
-                    ?>
+                $e = $produto->getAllEstoque();
+                ?>
                     <?php if ($e == 'Não encontrado!') { ?>
                 <div class="alert alert-danger" role="alert">
                     <?php
@@ -45,7 +45,15 @@
                     ?>
                 </div>
                 <?php
-        }
+
+            } 
+            $est = $produto->getEstoque0();
+            ?>
+        <div class="card col-md-8">
+            <h5 class="card-header">Total de produtos sem estoque: <?php echo $est ?></h5>
+            <a href="./relatorios/relatorio_estoque.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
+        </div>
+        <?php
         foreach($e as $index => $estoque) {
             $p = $produto->getProdutosID($estoque[4]);
             ?>
@@ -68,8 +76,9 @@
                 </tbody>
             </table>
         <?php
-        }
-        ?>
+
+    }
+    ?>
                     </div>
                 </div>
             </div>
