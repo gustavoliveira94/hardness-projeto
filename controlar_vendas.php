@@ -63,7 +63,7 @@
             <div class="card col-md-8">
                 <div style="display: flex;">
                     <h5 class="card-header col-md-6" style="display: flex; align-items: center; font-size: 16px;">Valor Total das Vendas: R$
-                        <?php echo number_format($total, 2, ',', '.') ?>
+                        <?php echo number_format(@$total, 2, ',', '.') ?>
                     </h5>
                     <div class="card-header col-md-6" style="display: flex; align-items: center;">
                         <p style="margin: 0">Filtrar:</p>
@@ -87,14 +87,19 @@
                         <a href="controlar_vendas.php">Limpar</a>
                     </div>
                 </div>
-                <a href="./relatorios/relatorio_vendas.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
-            </div>
-            <?php
-            if (!@$_GET['mes']) {
-                foreach ($v as $index => $vendas) {
-                    $u = $user->getClienteID($vendas[1]);
+                <?php 
+                if (!@$_GET['mes']) {
                     ?>
+                <a href="./relatorios/relatorio_vendas.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
+                <?php 
+            } else {
+                ?>
+            <a href="./relatorios/relatorio_vendas.php?mes=<?php echo @$_GET['mes'] ?>" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
+            <?php
 
+        }
+        ?>
+            </div>
             <table class="table table-striped table-light col-md-8">
                 <thead>
                     <tr>
@@ -105,6 +110,11 @@
                         <th scope="col">Valor Total</th>
                     </tr>
                 </thead>
+                <?php
+                if (!@$_GET['mes']) {
+                    foreach ($v as $index => $vendas) {
+                        $u = $user->getClienteID($vendas[1]);
+                        ?>
                 <tbody>
                     <tr>
                         <th scope="row">
@@ -125,25 +135,12 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
-            <?php
-
-        }
-    } else if (@$_GET['mes']) {
-        foreach ($mes as $index => $vendas) {
-            $u = $user->getClienteID($vendas[1]);
-            ?>
-
-        <table class="table table-striped table-light col-md-8">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ID Venda</th>
-                    <th scope="col">Data da Venda</th>
-                    <th scope="col">ID Cliente</th>
-                    <th scope="col">Valor Total</th>
-                </tr>
-            </thead>
+                <?php 
+            }
+        } else if (@$_GET['mes']) {
+            foreach ($mes as $index => $vendas) {
+                $u = $user->getClienteID($vendas[2]);
+                ?>
             <tbody>
                 <tr>
                     <th scope="row">
@@ -164,12 +161,12 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
-        <?php
+            <?php
 
+        }
     }
-}
-?>
+    ?>
+            </table>
         </div>
     </div>
     </div>

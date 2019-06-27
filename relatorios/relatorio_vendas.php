@@ -14,12 +14,31 @@ include '../classes/venda.class.php';
 include '../classes/user.class.php';
 ?>
 <!-- <?php
-$html = "
-    <h2 style='font-family: Helvetica; width: 100%; text-align: center'>Controle de Vendas</h2>";
-
-$v = $venda->getAllVenda();
+    $v = $venda->getAllVenda();
+    $mes = $venda->getVendaMes(@$_GET['mes']);
+    if (!@$_GET['mes']) {
+      foreach ($v as $index => $valor) {
+        @$total = $valor[3] + $total;
+        echo $total;
+      }
+    } else {
+      foreach ($mes as $index => $valor) {
+        @$total = $valor[3] + $total;
+        echo $total;
+      }
+    }
+    $html = "
+    <h2 style='font-family: Helvetica; width: 100%; text-align: center'>Controle de Vendas</h2>
+    <table style='font-family: Helvetica; text-align: center'>
+<thead>
+  <tr>
+    <th>Valor Total das Vendas: R$ </th>
+    <th>" . number_format(@$total, 2, ',', '.') . "</th>
+  </tr>
+</thead>
+</table>";
     $html = $html .
-        "<table style='width: 100%; background-color: #ccc; font-family: Helvetica;'>
+      "<table style='width: 100%; background-color: #ccc; font-family: Helvetica;'>
         <thead>
           <tr>
             <th>ID Venda</th>
@@ -28,7 +47,8 @@ $v = $venda->getAllVenda();
             <th>Valor Total</th>
           </tr>
         </thead>";
-        foreach ($v as $index => $vendas) {
+    if (!@$_GET['mes']) {
+      foreach ($v as $index => $vendas) {
         $u = $user->getClienteID($vendas[1]);
         $html = $html . "
         <tbody>
@@ -39,15 +59,29 @@ $v = $venda->getAllVenda();
             <td style='text-align: center; padding: 5px 0;'>R$" . number_format($vendas[3], 2, ',', '.') . "</td>
           </tr>
         </tbody>";
-        }
-        ?>
+      }
+    } else {
+      foreach ($mes as $index => $vendas) {
+        $u = $user->getClienteID($vendas[1]);
+        $html = $html . "
+        <tbody>
+          <tr>
+            <td style='text-align: center;'>{$vendas[0]}</td>
+            <td style='text-align: center;'>{$vendas[1]}</td>
+            <td style='text-align: center;'>{$vendas[2]}</td>
+            <td style='text-align: center; padding: 5px 0;'>R$" . number_format($vendas[3], 2, ',', '.') . "</td>
+          </tr>
+        </tbody>";
+      }
+    }
+    ?>
         <?php
-$html = $html .
-    "</table>";
+        $html = $html .
+          "</table>";
 
-$mpdf = new mPDF();
-$mpdf->SetDisplayMode('fullpage');
-$mpdf->WriteHTML($html);
-$mpdf->Output();
+        $mpdf = new mPDF();
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
 
-exit;
+        exit;

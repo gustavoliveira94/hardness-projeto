@@ -36,8 +36,8 @@
         <div class="row justify-content-center align-items-center flex-column">
             <h2>Controle de Produtos Vendidos</h2>
                 <?php
-                    $v = $venda->getItemVendaQtd();
-                    ?>
+                $v = $venda->getItemVendaQtd();
+                ?>
                     <?php if ($v == 'Não encontrado!') { ?>
                 <div class="alert alert-danger" role="alert">
                     <?php
@@ -45,15 +45,12 @@
                     ?>
                 </div>
                 <?php
-        } ?>
+
+            } ?>
         <div class="card col-md-8">
             <h5 class="card-header">Produtos mais vendidos</h5>
             <a href="./relatorios/relatorio_produtos.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
         </div>
-        <?php
-        foreach($v as $index => $vendas) {
-            $p = $produto->getProdutosID($vendas[0]);
-            ?>
             <table class="table table-striped table-light col-md-8">
                 <thead>
                   <tr>
@@ -63,6 +60,10 @@
                     <th scope="col">Quantidade</th>
                   </tr>
                 </thead>
+                <?php
+                foreach ($v as $index => $vendas) {
+                    $p = $produto->getProdutosID($vendas[0]);
+                    ?>
                 <tbody>
                   <tr>
                     <th scope="row"><?php echo $index + 1 ?></th>
@@ -71,10 +72,11 @@
                     <td style="width: 200px;"><?php echo $vendas[1] ?></td>
                   </tr>
                 </tbody>
+                <?php
+
+            }
+            ?>
             </table>
-        <?php
-        }
-        ?>
                     </div>
                 </div>
             </div>

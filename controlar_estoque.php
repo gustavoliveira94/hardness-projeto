@@ -46,17 +46,13 @@
                 </div>
                 <?php
 
-            } 
+            }
             $est = $produto->getEstoque0();
             ?>
         <div class="card col-md-8">
             <h5 class="card-header">Total de produtos sem estoque: <?php echo $est ?></h5>
             <a href="./relatorios/relatorio_estoque.php" target="_blank" style="width: 100%; text-align: center;">Gerar Relatório</a>
         </div>
-        <?php
-        foreach($e as $index => $estoque) {
-            $p = $produto->getProdutosID($estoque[4]);
-            ?>
             <table class="table table-striped table-light col-md-8">
                 <thead>
                   <tr>
@@ -66,6 +62,10 @@
                     <th scope="col">Quantidade</th>
                   </tr>
                 </thead>
+                <?php
+                foreach ($e as $index => $estoque) {
+                    $p = $produto->getProdutosID($estoque[4]);
+                    ?>
                 <tbody>
                   <tr>
                     <th scope="row"><?php echo $index + 1 ?></th>
@@ -74,11 +74,11 @@
                     <td><?php echo $estoque[1] ?></td>
                   </tr>
                 </tbody>
-            </table>
-        <?php
+                <?php
 
-    }
-    ?>
+            }
+            ?>
+            </table>
                     </div>
                 </div>
             </div>

@@ -32,11 +32,17 @@
     <div class="container-fluid facebook-content">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form>
+                <form method="post">
                     <div class="form-group newsletter">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cadastre seu E-mail para promoções!">
+                        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Cadastre seu E-mail para promoções!">
                         <button type="submit" class="btn btn-success">Cadastrar</button>
                     </div>
+                    <?php
+                    if (!empty($_POST['email'])) {
+                        $email = addslashes($_POST['email']);
+                        $user->promocoes($email);
+                    }
+                    ?>
                 </form>
             </div>
         </div>
@@ -48,9 +54,9 @@
             </div>
         </div>
         <div class="row justify-content-between">
-            <?php foreach($venda->getItemVendaTop() as $produtos) { 
+            <?php foreach ($venda->getItemVendaTop() as $produtos) {
                 $p = $produto->getProdutosID($produtos[0]);
-            ?>
+                ?>
             <div class="card col-md-3">
                 <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
                     <img src="./img/<?php echo $p[5] ?>" alt="..." style="height: 100%; max-width: 250px;">
@@ -65,7 +71,8 @@
                     <a href="produto?id=<?php echo $p[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
-            <?php } ?>
+            <?php 
+        } ?>
         </div>
     </div>
     <div class="container-fluid facebook-content">
@@ -82,7 +89,7 @@
             </div>
         </div>
         <div class="row justify-content-between">
-            <?php foreach($produto->getProdutosRecentes() as $produtos) { ?>
+            <?php foreach ($produto->getProdutosRecentes() as $produtos) { ?>
             <div class="card col-md-3">
                 <div style="display: flex; justify-content: center; height: 180px; margin-bottom: 5px; padding: 15px;">
                     <img src="./img/<?php echo $produtos[5] ?>" alt="..." style="height: 100%; max-width: 250px;">
@@ -97,7 +104,8 @@
                     <a href="produto?id=<?php echo $produtos[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
-            <?php } ?>
+            <?php 
+        } ?>
         </div>
     </div>
     <?php

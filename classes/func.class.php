@@ -58,8 +58,10 @@ class Funcionarios
 
     public function logout()
     {
-        session_destroy();
-        header("Location:login_func.php");
+        if ($_SESSION['idfuncionario']) {
+            session_destroy();
+            header("Location:login_func.php");
+        }
     }
 
     public function getFuncionarioID($id)

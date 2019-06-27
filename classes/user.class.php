@@ -129,6 +129,30 @@ class Users
             return $cliente = $sql->fetch();
         }
     }
+
+    public function validateEmailPromocoes($email)
+    {
+        $sql = 'SELECT * FROM promocoes WHERE email = :email';
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':email', $email);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function promocoes($email)
+    {
+        if ($this->validateEmailPromocoes($email) == false) {
+            $sql = "INSERT INTO promocoes (email) VALUES (:email)";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(':email', $email);
+            $sql->execute();
+        }
+    }
 }
 
 $user = new Users();
