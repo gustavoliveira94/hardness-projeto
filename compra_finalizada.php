@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>HardNess</title>
 </head>
 
@@ -39,7 +42,7 @@
     $data = date('Y-m-d');
     $venda->venda($data, $_SESSION['idcliente'], $total);
     $idvenda = $venda->getVenda($_SESSION['idcliente']);
-    $venda->pagamento($idvenda[0], $idvenda[2], $data);
+    $venda->pagamento($idvenda[0], $idvenda[3], $data);
     foreach ($_SESSION['carrinho'] as $index => $produtos) {
         @$total = $_SESSION['qtdcarrinho'][$index] * $_SESSION['carrinho'][$index][6] + $total;
         $venda->itemvenda($idvenda[0], $produtos[0], $produtos[6], $_SESSION['qtdcarrinho'][$index]);
@@ -60,9 +63,11 @@
                         <h6 class="card-subtitle mb-2 text-muted">Nº da compra:
                             <?php echo $idvenda[0] ?>
                         </h6>
-                        <p class="card-subtitle mb-2 text-muted">Valor Total: R$
-                            <?php echo number_format($idvenda[3], 2, ',', '.'); ?>
-                        </p>
+                        <div class="card-subtitle mb-2 text-muted">Valor Total: R$
+                            <p id="valorvenda">
+                            <?php echo $idvenda[3]; ?>
+                            </p>
+                        </div>
                         <a href="index.php" class="card-link">Continuar</a>
                     </div>
                 </div>
@@ -74,9 +79,7 @@
 
 <!-- Javascript -->
 <script>
-    // setTimeout(() => {
-    //     window.location.href = "index.php"
-    // }, 5000);
+    $("#valorvenda").mask('000.000.000.000.000,00', {reverse: true});
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

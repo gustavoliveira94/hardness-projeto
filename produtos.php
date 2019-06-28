@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>HardNess - Produtos</title>
 </head>
 
@@ -84,9 +87,9 @@
                     <h5 class="card-title">
                         <?php echo $produtos[2] ?>
                     </h5>
-                    <p>R$:
-                    <?php echo number_format($produtos[6], 2, ',', '.') ?>
-                    </p>
+                    <div>R$:
+                    <p class="valor"><?php echo $produtos[6] ?></p>
+                    </div>
                     <a href="produto?id=<?php echo $produtos[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
@@ -107,9 +110,9 @@
                     <h5 class="card-title">
                         <?php echo $produtos[2] ?>
                     </h5>
-                    <p>R$:
-                        <?php echo $produtos[6] ?>
-                    </p>
+                    <div>R$:
+                    <p class="valor"><?php echo $produtos[6] ?></p>
+                    </div>
                     <a href="produto?id=<?php echo $produtos[0] ?>" class="btn btn-purple">Comprar</a>
                 </div>
             </div>
@@ -135,6 +138,9 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $(".valor").mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

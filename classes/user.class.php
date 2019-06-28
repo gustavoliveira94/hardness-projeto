@@ -64,12 +64,6 @@ class Users
         }
     }
 
-    public function logout()
-    {
-        session_destroy();
-        header("Location:produtos.php");
-    }
-
     public function getClienteID($id)
     {
         $sql = 'SELECT * FROM cliente WHERE idcliente = :id';

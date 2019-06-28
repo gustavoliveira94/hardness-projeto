@@ -9,7 +9,7 @@ class Funcionarios
         $this->pdo = new PDO('mysql:dbname=hdness;host=localhost', 'root', 'root');
     }
 
-    public function create($nome, $rg, $cpf, $senha, $email, $telefone, $endereco, $bairro, $cidade, $uf, $cep, $datanascimento, $funcao, $salario, $status = 2)
+    public function create($nome, $rg, $cpf, $senha, $email, $telefone, $endereco, $bairro, $cidade, $uf, $cep, $datanascimento, $funcao, $salario, $status)
     {
         $sql = "INSERT INTO funcionario (nome, rg, cpf, senha, email, telefone, endereco, bairro, cidade, uf, cep, datanascimento, funcao, salario, status) VALUES (:nome, :rg, :cpf, :senha, :email, :telefone, :endereco, :bairro, :cidade, :uf, :cep, :datanascimento, :funcao, :salario, :status)";
         $sql = $this->pdo->prepare($sql);
@@ -53,14 +53,6 @@ class Funcionarios
             header("Location: painel_func.php");
         } else {
             echo 'Usuário não cadastrado ou a senha está incorreta!';
-        }
-    }
-
-    public function logout()
-    {
-        if ($_SESSION['idfuncionario']) {
-            session_destroy();
-            header("Location:login_func.php");
         }
     }
 

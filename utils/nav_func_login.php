@@ -5,7 +5,7 @@ session_start()
 <div class="container-fluid menu">
     <div class="row justify-content-center align-items-center nav-top">
         <div class="col-md-3 text-center">
-            <a href="index.php" id="logo">HARDNESS</a>
+            <a href="login_func.php" id="logo">HARDNESS</a>
         </div>
     </div>
 </div>

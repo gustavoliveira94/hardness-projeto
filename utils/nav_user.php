@@ -1,6 +1,7 @@
 <?php
 include './classes/user.class.php';
 session_start();
+ob_start();
 ?>
 <div class="container-fluid menu">
     <div class="row justify-content-center align-items-center nav-top">
@@ -14,6 +15,15 @@ session_start();
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="profile.php">Meus dados</a>
+                </li>
+                <li class="nav-item">
+                <?php
+                if (isset($_SESSION['idcliente']) && !empty($_SESSION['idcliente'])) {
+                    $id = $_SESSION['idcliente'];
+                    $cliente = $user->getClienteID($id);
+                }
+                ?>
+                    <a class="nav-link" href="compras.php?email=<?php echo $cliente[3]; ?>">Compras</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="address.php">Meu endereço</a>

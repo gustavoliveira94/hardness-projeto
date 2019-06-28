@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>Cadastro Funcionário</title>
 </head>
 
@@ -50,56 +53,58 @@
                 $datanascimento = addslashes($_POST['datanascimento']);
                 $funcao = addslashes($_POST['funcao']);
                 $salario = addslashes($_POST['salario']);
+                $status = $funcao == 'Admin' ? 1 : 2;
                 ?>
                             <div class="alert alert-danger" role="alert">
                                 <?php
-                                $func->create($nome, $rg, $cpf, $senha, $email, $telefone, $endereco, $bairro, $cidade, $uf, $cep, $datanascimento, $funcao, $salario);
+                                $func->create($nome, $rg, $cpf, $senha, $email, $telefone, $endereco, $bairro, $cidade, $uf, $cep, $datanascimento, $funcao, $salario, $status);
                                 ?>
                             </div>
                 <?php
+
             } ?>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome</label>
-                        <input type="text" name="nome" class="form-control" placeholder="Digite o nome">
+                        <input type="text" required name="nome" class="form-control" placeholder="Digite o nome">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="rg">RG</label>
-                        <input type="text" name="rg" class="form-control" placeholder="Digite o RG">
+                        <input type="text" required name="rg" id="rg" class="form-control" placeholder="Digite o RG">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" class="form-control" placeholder="Digite o CPF">
+                    <input type="text" required name="cpf" id="cpf" class="form-control" placeholder="Digite o CPF">
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" class="form-control" placeholder="Digite a senha">
+                    <input type="password" required name="senha" class="form-control" placeholder="Digite a senha">
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="text" name="email" class="form-control" placeholder="Digite o E-mail">
+                    <input type="text" required name="email" class="form-control" placeholder="Digite o E-mail">
                 </div>
                 <div class="form-group">
                     <label for="telefone">Telefone</label>
-                    <input type="text" name="telefone" class="form-control" placeholder="Digite o Telefone">
+                    <input type="text" required name="telefone" id="telefone" class="form-control" placeholder="Digite o Telefone">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="endereco">Endereço</label>
-                        <input type="text" name="endereco" class="form-control" placeholder="Digite o endereço">
+                        <input type="text" required name="endereco" class="form-control" placeholder="Digite o endereço">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="bairro">Bairro</label>
-                        <input type="text" name="bairro" class="form-control" placeholder="Digite o bairro">
+                        <input type="text" required name="bairro" class="form-control" placeholder="Digite o bairro">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cidade">Cidade</label>
-                        <input type="text" name="cidade" class="form-control" placeholder="Digite a cidade">
+                        <input type="text" required name="cidade" class="form-control" placeholder="Digite a cidade">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="uf">Estado</label>
-                        <select class="form-control" name="uf" placeholder="Escolha uma cidade">
+                        <select class="form-control" required name="uf" placeholder="Escolha uma cidade">
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -131,20 +136,23 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="cep">CEP</label>
-                        <input type="text" name="cep" class="form-control">
+                        <input type="text" required name="cep" id="cep" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="datadenascimento">Data de Nascimento</label>
-                    <input type="date" name="datanascimento" class="form-control">
+                    <input type="date" required name="datanascimento" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="funcao">Função</label>
-                    <input type="text" name="funcao" class="form-control" placeholder="Digite a função">
+                        <label for="funcao">Função</label>
+                        <select class="form-control" required name="funcao" placeholder="Escolha uma função">
+                        <option value="Admin">Admin</option>
+                        <option value="Moderador">Moderador</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="salario">Salário</label>
-                    <input type="text" name="salario" class="form-control" placeholder="Digite o salário">
+                    <input type="text" required id="salario" name="salario" class="form-control" placeholder="Digite o salário">
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
@@ -153,6 +161,13 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $("#cpf").mask("000.000.000-00");
+    $("#rg").mask("00.000.000-0");
+    $("#cep").mask("00000-000");
+    $('#telefone').mask('(00)00000-0000');
+    $('#salario').mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

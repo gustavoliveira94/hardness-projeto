@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>Produto</title>
 </head>
 
@@ -73,11 +76,11 @@
                 </div>
                     <div class="form-group">
                         <label for="nomeproduto">Nome</label>
-                        <input type="text" name="nomeproduto" class="form-control" placeholder="Digite o nome do produto">
+                        <input type="text" required name="nomeproduto" class="form-control" placeholder="Digite o nome do produto">
                     </div>
                     <div class="form-group">
                         <label for="produtocategoria">Categoria</label>
-                        <select class="form-control" name="produtocategoria" placeholder="Escolha uma categoria">
+                        <select class="form-control" required name="produtocategoria" placeholder="Escolha uma categoria">
                             <option value="midiadigital">Mídia Digital</option>
                             <option value="midiafisica">Mídia Física</option>
                             <option value="consoles">Consoles</option>
@@ -87,25 +90,25 @@
                     </div>
                     <div class="form-group">
                         <label for="descricao">Descrição</label>
-                        <textarea class="form-control" name="descricao" rows="3" placeholder="Digite uma descrição"></textarea>
+                        <textarea class="form-control" required name="descricao" rows="3" placeholder="Digite uma descrição"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="imagem">Imagem do produto</label>
-                        <input type="file" name="imagem" class="form-control-file" placeholder="Selecione uma imagem">
+                        <input type="file" required name="imagem" class="form-control-file" placeholder="Selecione uma imagem">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="valorvenda">Valor de Venda</label>
-                            <input type="text" name="valorvenda" class="form-control" placeholder="Digite o valor">
+                            <input id="valorvenda" required type="text" name="valorvenda" class="form-control" placeholder="Digite o valor">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="valorcompra">Valor de Compra</label>
-                            <input type="text" name="valorcompra" class="form-control" placeholder="Digite o valor">
+                            <input type="text" required id="valorcompra" name="valorcompra" class="form-control" placeholder="Digite o valor">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="fabricante">Fabricante</label>
-                        <input type="text" name="fabricante" class="form-control" placeholder="Digite o fabricante">
+                        <input type="text" required name="fabricante" class="form-control" placeholder="Digite o fabricante">
                     </div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
@@ -113,6 +116,10 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $("#valorvenda").mask('000.000.000.000.000,00', {reverse: true});
+    $("#valorcompra").mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

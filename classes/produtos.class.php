@@ -26,9 +26,9 @@ class Produtos
         header("Location: painel_func.php");
     }
 
-    public function update($id, $nome, $email, $telefone, $senha)
+    public function update($produto, $fornecedor, $nome, $categoria, $descricao, $imagem, $valorvenda, $valorcompra, $fabricante)
     {
-        $sql = "UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone', senha = '$senha' WHERE idcliente = '$id'";
+        $sql = "UPDATE produto SET idfornecedor = '$fornecedor', nomeproduto = '$nome', produtocategoria = '$categoria', descricao = '$descricao', imagem = '$imagem', valorvenda = '$valorvenda', valorcompra = '$valorcompra', fabricante = '$fabricante' WHERE idproduto = '$produto'";
         $sql = $this->pdo->query($sql);
         echo 'Atualizado com sucesso!';
     }
@@ -198,7 +198,7 @@ class Produtos
         $sql->execute();
         $estoque = $sql->fetch();
 
-        if ($estoque[1] < $quantidade) {
+        if ($estoque[1] <= $quantidade) {
             return true;
         } else {
             return false;

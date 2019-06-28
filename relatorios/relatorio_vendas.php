@@ -33,7 +33,7 @@ include '../classes/user.class.php';
 <thead>
   <tr>
     <th>Valor Total das Vendas: R$ </th>
-    <th>" . number_format(@$total, 2, ',', '.') . "</th>
+    <th>" . number_format(substr(@$total, 0, 5), 2, ',', '.') . "</th>
   </tr>
 </thead>
 </table>";
@@ -56,7 +56,7 @@ include '../classes/user.class.php';
             <td style='text-align: center;'>{$vendas[0]}</td>
             <td style='text-align: center;'>{$vendas[1]}</td>
             <td style='text-align: center;'>{$vendas[2]}</td>
-            <td style='text-align: center; padding: 5px 0;'>R$" . number_format($vendas[3], 2, ',', '.') . "</td>
+            <td style='text-align: center; padding: 5px 0;'>R$" . number_format(substr($vendas[3], 0, 4), 2, ',', '.') . "</td>
           </tr>
         </tbody>";
       }
@@ -69,7 +69,7 @@ include '../classes/user.class.php';
             <td style='text-align: center;'>{$vendas[0]}</td>
             <td style='text-align: center;'>{$vendas[1]}</td>
             <td style='text-align: center;'>{$vendas[2]}</td>
-            <td style='text-align: center; padding: 5px 0;'>R$" . number_format($vendas[3], 2, ',', '.') . "</td>
+            <td style='text-align: center; padding: 5px 0;'>R$" . number_format(substr($vendas[3], 0, 4), 2, ',', '.') . "</td>
           </tr>
         </tbody>";
       }

@@ -28,45 +28,22 @@
 
 <body>
     <?php
-    require_once('./utils/nav_func.php');
+    require_once('./utils/nav_user.php');
     include './classes/produtos.class.php';
     include './classes/venda.class.php';
-    if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
-        header("Location: login_func.php");
+    include './classes/func.class.php';
+    if (!isset($_SESSION['idcliente']) && empty($_SESSION['idcliente'])) {
+        header("Location: login.php");
     }
     ?>
     <div class="container func-painel">
         <div class="row justify-content-center align-items-center flex-column">
-            <h2>Buscar Cliente</h2>
-            <form class="col-md-5 bg-light pb-2 pt-2" method="get">
-                <?php
-                if (!empty($_GET['email'])) {
-
-                    $email = addslashes(($_GET['email']));
-                    $f = $func->getClienteEmail($email);
-                    ?>
-                    <?php if ($f == 'Não encontrado!') { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php
-                    echo $f;
-                    ?>
-                </div>
-                <?php
-
-            }
-        } ?>
-                <div class="form-group">
-                    <label for="email">E-mail do Cliente</label>
-                    <input type="email" name="email" class="form-control" placeholder="Digite o e-mail do cliente">
-                </div>
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
+            <h2>Histórico de compra</h2>
             <div class="container">
             <?php
             if (!empty($_GET['email'])) {
                 ?>
-                <div class="row justify-content-center align-items-center flex-column" style="margin-top: 100px;">
-                        <h3 style="color: #fff;">Compras do Cliente:</h3>
+                <div class="row justify-content-center align-items-center flex-column">
                         <div class="col-md-6">
                             <?php
                             $email = addslashes(($_GET['email']));
@@ -78,6 +55,7 @@
                             if (!empty($_GET['item'])) {
                                 $item = $_GET['item'];
                                 $i = $venda->getItemVenda($item);
+                                $p = $produto->getProdutosID($i[0][2]);
                                 if ($i) {
                                     foreach ($i as $items) {
                                         $p = $produto->getProdutosID($items[2]);
@@ -87,7 +65,7 @@
                                     Detalhes da venda
                                 </div>
                                 <div class="card-body">
-                                <h5 class="card-title">ID da venda: <?php echo $items[1]; ?></h5>
+                                    <h5 class="card-title">ID da venda: <?php echo $items[1]; ?></h5>
                                     <p class="card-text"><b>ID Produto:</b> <br/> <?php echo $items[2]; ?></p>
                                     <p class="card-text"><b>Nome do Produto:</b> <br/> <?php echo $p[2]; ?></p>
                                     <p class="card-text" style='margin: 0'><b>Valor Unitário:</b> R$ <?php echo "<p class='valor'>" . $items[3] . "</p>" ?></p>
@@ -102,7 +80,7 @@
                     }
                     ?>
                             <div class="col-md-12" style="padding-left: 25px;">
-                                <a href="clientes.php?email=<?php echo $f[3] ?>" class="btn btn-primary">Consultar</a>
+                                <a href="compras.php?email=<?php echo $f[3] ?>" class="btn btn-primary">Consultar</a>
                             </div>
                         <?php
 
@@ -122,13 +100,13 @@
 
                                 <div id="collapse<?php echo $venda[0] ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
-                                    </p><b>Valor da compra:</b></p>
+                                        </p><b>Valor da compra:</b></p>
                                         <p class="valor"><?php echo $venda[3] ?></p>
                                         </p style="margin-top: 10px;"><b>Data da compra:</b></p>
                                         <?php echo implode('/', array_reverse(explode('-', $venda[1]))) ?>
                                     </div>
                                     <div class="card-body">
-                                        <a href="clientes.php?email=<?php echo $f[3] ?>&item=<?php echo $venda[0] ?>" class="btn btn-primary" type="button">
+                                        <a href="compras.php?email=<?php echo $f[3] ?>&item=<?php echo $venda[0] ?>" class="btn btn-primary" type="button">
                                             <?php echo "Consultar itens vendidos" ?>
                                         </a>
                                     </div>

@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>Fornecedor</title>
 </head>
 
@@ -40,7 +43,7 @@
 
                     $nome = addslashes($_POST['nome']);
                     $ie = addslashes($_POST['ie']);
-                    $cnpj = addslashes($POST['cnpj']);
+                    $cnpj = addslashes($_POST['cnpj']);
                     $email = addslashes($_POST['email']);
                     $telefone = addslashes($_POST['telefone']);
                     $endereco = addslashes($_POST['endereco']);
@@ -59,47 +62,47 @@
             } ?>
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input type="text" name="nome" class="form-control" placeholder="Digite o nome do fornecedor">
+                        <input type="text" required name="nome" class="form-control" placeholder="Digite o nome do fornecedor">
                     </div>
                     <div class="form-group">
                         <label for="ie">IE</label>
-                        <input type="text" name="ie" class="form-control" placeholder="Digite o ie">
+                        <input type="text" required name="ie" class="form-control" placeholder="Digite o ie">
                     </div>
                     <div class="form-group">
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" name="cnpj" class="form-control" placeholder="Digite o cnpj">
+                        <input type="text" required id="cnpj" name="cnpj" class="form-control" placeholder="Digite o cnpj">
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" name="email" class="form-control" placeholder="Digite o e-mail">
+                        <input type="email" required name="email" class="form-control" placeholder="Digite o e-mail">
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone</label>
-                        <input type="tel" name="telefone" class="form-control" placeholder="Digite o telefone">
+                        <input type="tel" id="telefone" required name="telefone" class="form-control" placeholder="Digite o telefone">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="endereco">Endereço</label>
-                            <input type="text" name="endereco" class="form-control" placeholder="Digite o endereço">
+                            <input type="text" required name="endereco" class="form-control" placeholder="Digite o endereço">
                         </div>
                         <div class="form-group">
                             <label for="fabricante">Bairro</label>
-                            <input type="text" name="bairro" class="form-control" placeholder="Digite o bairro">
+                            <input type="text" required name="bairro" class="form-control" placeholder="Digite o bairro">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="endereco">CEP</label>
-                            <input type="text" name="cep" class="form-control" placeholder="Digite o CEP">
+                            <input type="text" required id="cep" name="cep" class="form-control" placeholder="Digite o CEP">
                         </div>
                         <div class="form-group">
                             <label for="fabricante">Cidade</label>
-                            <input type="text" name="cidade" class="form-control" placeholder="Digite o cidade">
+                            <input type="text" required name="cidade" class="form-control" placeholder="Digite o cidade">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="uf">Estado</label>
-                        <select class="form-control" name="uf" placeholder="Escolha uma cidade">
+                        <select class="form-control" required name="uf" placeholder="Escolha uma cidade">
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -135,6 +138,11 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $("#cnpj").mask('00.000.000/0000-00', {reverse: true});
+    $("#cep").mask('00000-000');
+    $("#telefone").mask('(00)00000-0000');
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

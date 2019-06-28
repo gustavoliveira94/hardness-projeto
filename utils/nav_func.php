@@ -1,6 +1,7 @@
 <?php
 include './classes/func.class.php';
 session_start();
+ob_start();
 require_once('./utils/nav_func.php');
 if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
     header("Location: login_func.php");
@@ -17,7 +18,15 @@ if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
                     <a class="nav-link" href="clientes.php">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="func_cadastro_produtos.php">Produtos</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            Produtos
+                        </a>
+                        <div class="dropdown-menu">
+                        <a class="nav-link" href="func_cadastro_produtos.php">Cadastrar Produtos</a>
+                            <a class="dropdown-item" href="editar_produtos.php">Editar Produtos</a>
+                        </div>
+                    </li>
                 </li>
                 <?php 
                 $id = $_SESSION['idfuncionario'];
@@ -65,7 +74,7 @@ if (!isset($_SESSION['idfuncionario']) && empty($_SESSION['idfuncionario'])) {
                             ?>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="logout.php">Sair</a>
+                            <a class="dropdown-item" href="logout_func.php">Sair</a>
                         </div>
                     </li>
                 </li>

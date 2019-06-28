@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>Endereço</title>
 </head>
 
@@ -75,23 +78,23 @@
                 </div>
                 <div class="form-group">
                     <label for="endereco">Endereço</label>
-                    <input type="text" name="endereco" class="form-control" placeholder="Digite seu Endereço" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[2]) : '' ?>">
+                    <input type="text" required name="endereco" class="form-control" placeholder="Digite seu Endereço" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[2]) : '' ?>">
                 </div>
                 <div class="form-group">
                     <label for="bairro">Bairro</label>
-                    <input type="text" name="bairro" class="form-control" placeholder="Digite seu bairro" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[3]) : '' ?>">
+                    <input type="text" required name="bairro" class="form-control" placeholder="Digite seu bairro" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[3]) : '' ?>">
                 </div>
                 <div class="form-group">
                     <label for="cep">CEP</label>
-                    <input type="text" name="cep" class="form-control" placeholder="Digite seu CEP" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[4]) : '' ?>">
+                    <input type="text" id="cep" required name="cep" class="form-control" placeholder="Digite seu CEP" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[4]) : '' ?>">
                 </div>
                 <div class="form-group">
                     <label for="cidade">Estado</label>
-                    <input type="text" name="cidade" class="form-control" placeholder="Digite sua cidade" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[5]) : '' ?>">
+                    <input type="text" required name="cidade" class="form-control" placeholder="Digite sua cidade" value="<?php echo sizeof($e) > 0 ? utf8_encode($e[5]) : '' ?>">
                 </div>
                 <div class="form-group">
                     <label for="uf">Cidade</label>
-                    <select class="form-control" name="uf" placeholder="Escolha uma cidade">
+                    <select required class="form-control" name="uf" placeholder="Escolha uma cidade">
                         <option <?php echo sizeof($e) > 0 ? utf8_encode($e[6]) : '' ?>><?php echo sizeof($e) > 0 ? utf8_encode($e[6]) : 'Selecione uma UF' ?></option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -140,6 +143,9 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $("#cep").mask('00000-000');
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

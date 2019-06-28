@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>HardNess - Produto</title>
 </head>
 
@@ -51,10 +54,20 @@
                     <hr>
                     <div class="card-body">
                         <div class="col-md-6">
-                            <h3><small style="font-size: 16px;">R$:</small> <?php echo number_format($p[6], 2, ',', '.') ?></h3>
+                            R$:
+                            <h3 id="valorvenda"><small style="font-size: 16px;"></small> <?php echo $p[6] ?></h3>
                         </div>
                         <div class="col-md-6">
+                        <?php
+                        $est = $produto->getEstoque2($p[0], 0);
+                        if (!$est) {
+                            ?>
                             <a href="carrinho.php?id=<?php echo $p[0] ?>" class="btn btn-success">COMPRAR</a>
+                        <?php
+                    } else { ?>
+                            <button disabled class="btn btn-danger">SEM ESTOQUE</button>
+                        <?php
+                    } ?>
                         </div>
                     </div>
                 </div>
@@ -67,6 +80,9 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $("#valorvenda").mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

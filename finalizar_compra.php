@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>HardNess - Produto</title>
 </head>
 
@@ -80,7 +83,9 @@
                                     <div class="col-md-3" style="height: 120px; display: flex; align-items: center;">
                                         <div class="card-body" style="height: 100px; display: flex; align-items: center;">
                                             <h5 class="card-title" style="margin: 0;">R$:
-                                                <?php echo number_format($produtos_carrinho[6], 2, ',', '.') ?>
+                                                <p class="valorvenda">
+                                                <?php echo $produtos_carrinho[6] ?>
+                                                </p>
                                             </h5>
                                         </div>
                                     </div>
@@ -103,7 +108,9 @@
                             }
                             ?>
                             <p class="badge badge-primary">Valor total:
-                                <?php echo number_format($total, 2, ',', '.'); ?>
+                                <p id="valortotal" style="margin-left: -5px" class="badge badge-primary">
+                                <?php echo $total ?>
+                                </p>
                             </p>
                         </div>
                         <div class="col-md-12" style="display: flex; justify-content: flex-end; align-items: center; margin-top: 50px; margin-bottom: -50px;">
@@ -138,6 +145,10 @@
 </script>
 
 <!-- Javascript -->
+<script>
+    $(".valorvenda").mask('000.000.000.000.000,00', {reverse: true});
+    $("#valortotal").mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

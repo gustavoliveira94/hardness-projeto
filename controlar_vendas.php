@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>Controle - Vendas</title>
 </head>
 
@@ -63,7 +66,15 @@
             <div class="card col-md-8">
                 <div style="display: flex;">
                     <h5 class="card-header col-md-6" style="display: flex; align-items: center; font-size: 16px;">Valor Total das Vendas: R$
-                        <?php echo number_format(@$total, 2, ',', '.') ?>
+                    <small style="color: #000; font-size: 16px; margin-left: 5px" class="valortotal">
+                    <?php 
+                            if($v) {
+                                 echo @$total ? @$total : '0';
+                            } else {
+                                echo $total ? @$total : '0';
+                            }
+                        ?>
+                    </small>
                     </h5>
                     <div class="card-header col-md-6" style="display: flex; align-items: center;">
                         <p style="margin: 0">Filtrar:</p>
@@ -131,7 +142,7 @@
                             <a href="clientes.php?email=<?php echo $u[3] ?>&item=<?php echo $vendas[0] ?>">Detalhes</a>
                         </td>
                         <td>R$
-                            <?php echo number_format($vendas[3], 2, ',', '.') ?>
+                            <?php echo $vendas[3] ?>
                         </td>
                     </tr>
                 </tbody>
@@ -156,8 +167,8 @@
                         <?php echo $vendas[2] ?> -
                         <a href="clientes.php?email=<?php echo $u[3] ?>&item=<?php echo $vendas[0] ?>">Detalhes</a>
                     </td>
-                    <td>R$
-                        <?php echo number_format($vendas[3], 2, ',', '.') ?>
+                    <td id="valor">
+                        <p><?php echo $vendas[3] ?></p>
                     </td>
                 </tr>
             </tbody>
@@ -174,6 +185,11 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $(".valortotal").mask('000.000.000.000.000,00', {reverse: true});
+    $("td:nth-of-type(4)").mask('000.000.000.000.000,00', {reverse: true});
+    $("td:nth-of-type(8)").mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

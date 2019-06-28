@@ -34,7 +34,7 @@
         </div>
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <small>Copyright © 2018 · HardNess</small>
+                <small>Copyright © 2019 · HardNess</small>
             </div>
         </div>
     </footer>

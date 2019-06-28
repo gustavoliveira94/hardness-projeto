@@ -20,6 +20,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/app.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
     <title>HardNess - Produto</title>
 </head>
 
@@ -46,11 +49,11 @@
                             <form class="col-md-12" action="compra_finalizada.php">
                                 <div class="form-group">
                                     <label for="name">Nome do cartão:</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Gustavo M Oliveira">
+                                    <input required type="text" name="name" class="form-control" placeholder="Gustavo M Oliveira">
                                     <label for="name">Número do cartão:</label>
-                                    <input type="text" name="name" class="form-control" placeholder="000000000">
+                                    <input required id="numeroc" type="text" name="name" class="form-control" placeholder="0000 0000 0000 0000">
                                     <label for="name">Bandeira do cartão:</label>
-                                    <select class="form-control">
+                                    <select required class="form-control">
                                         <option>Visa</option>
                                         <option>Mastercard</option>
                                         <option>Elo</option>
@@ -58,11 +61,11 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <label for="name">Validade:</label>
-                                            <input type="date" name="name" class="form-control" placeholder="Gustavo M Oliveira">
+                                            <input required id="validade" type="text" name="name" class="form-control" placeholder="Mês/Ano">
                                         </div>
                                         <div class="col">
                                             <label for="name">Código de segurança:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="000">
+                                            <input required id="cod" type="text" name="name" class="form-control" placeholder="000">
                                         </div>
                                     </div>
                                     <?php
@@ -72,7 +75,7 @@
                                     }
                                     ?>
                                     <label for="name">Valor:</label>
-                                    <input disabled type="text" name="name" class="form-control" value="<?php echo number_format($total, 2, ',', '.'); ?>">
+                                    <input disabled type="text" name="name" class="form-control" id="valorvenda" value="<?php echo $total ?>">
                                 </div>
                         </div>
                         <div class="col-md-12" style="display: flex; justify-content: flex-end; align-items: center; margin-top: 50px; margin-bottom: -50px;">
@@ -87,6 +90,12 @@
 </body>
 
 <!-- Javascript -->
+<script>
+    $("#numeroc").mask('0000 0000 0000 0000', {reverse: true});
+    $("#validade").mask('00/00', {reverse: true});
+    $("#cod").mask('000', {reverse: true});
+    $("#valorvenda").mask('000.000.000.000.000,00', {reverse: true});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

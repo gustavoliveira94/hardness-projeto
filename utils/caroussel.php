@@ -1,6 +1,6 @@
 <?php 
 include './classes/produtos.class.php';
-$p1 = $produto->getProdutosID(37);
+$p1 = $produto->getProdutosID(55);
 $p2 = $produto->getProdutosID(47);
 $p3 = $produto->getProdutosID(48);
 ?>
@@ -21,9 +21,9 @@ $p3 = $produto->getProdutosID(48);
                         <h5 class="card-title">
                             <?php echo $p1[2] ?>
                         </h5>
-                        <p>R$:
-                            <?php echo number_format($p1[6], 2, ',', '.') ?>
-                        </p>
+                        <div>R$:
+                        <p class="valor"><?php echo $p1[6] ?></p>
+                        </div>
                         <a href="produto?id=<?php echo $p1[0] ?>" class="btn btn-purple">Comprar</a>
                     </div>
                 </div>
@@ -39,9 +39,9 @@ $p3 = $produto->getProdutosID(48);
                         <h5 class="card-title">
                             <?php echo $p2[2] ?>
                         </h5>
-                        <p>R$:
-                        <?php echo number_format($p2[6], 2, ',', '.') ?>
-                        </p>
+                        <div>R$:
+                        <p class="valor"><?php echo $p2[6] ?></p>
+                        </div>
                         <a href="produto?id=<?php echo $p2[0] ?>" class="btn btn-purple">Comprar</a>
                     </div>
                 </div>
@@ -57,9 +57,9 @@ $p3 = $produto->getProdutosID(48);
                         <h5 class="card-title">
                             <?php echo $p3[2] ?>
                         </h5>
-                        <p>R$:
-                        <?php echo number_format($p3[6], 2, ',', '.') ?>
-                        </p>
+                        <div>R$:
+                        <p class="valor"><?php echo $p3[6] ?></p>
+                        </div>
                         <a href="produto?id=<?php echo $p3[0] ?>" class="btn btn-purple">Comprar</a>
                     </div>
                 </div>
